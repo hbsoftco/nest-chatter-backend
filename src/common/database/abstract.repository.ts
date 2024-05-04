@@ -24,7 +24,7 @@ export abstract class AbstractRepository<T extends AbstractEntity> {
       throw new NotFoundException('Document not found.');
     }
 
-    return document as T;
+    return document as unknown as T;
   }
 
   async findOneAndUpdate(
@@ -41,7 +41,7 @@ export abstract class AbstractRepository<T extends AbstractEntity> {
       throw new NotFoundException('Document not found.');
     }
 
-    return document as T;
+    return document as unknown as T;
   }
 
   async find(filterQuery: FilterQuery<T>): Promise<T[]> {
@@ -52,6 +52,6 @@ export abstract class AbstractRepository<T extends AbstractEntity> {
     const document = await this.model.findOneAndDelete(filterQuery, {
       lean: true,
     });
-    return document as T;
+    return document as unknown as T;
   }
 }
